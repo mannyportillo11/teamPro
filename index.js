@@ -1,5 +1,8 @@
 const inquirer = require('inquirer');
 const { writeFile, copyFile } = require('./lib/generateSite');
+const generateSite = require('./src/page-template');
+
+const Manager = require("./lib/Manager");
 
 //initial empty employee object array
 const employees = [];
@@ -66,6 +69,30 @@ teamGo = () => {
         const { name, id, email, officeNumber, role } = managerResults;
         const newManager = new Manager(name, id, email, officeNumber, role);
         employees.push(newManager);
+
+        //add the next exmployee
+        employeePosition();
+    })
+};
+
+employeePosition = () => {
+    console.log("What is the employee's role?");
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "What is the Employee's position?",
+            choices: [
+                'Engineer',
+                'Intern'
+            ],
+        }
+    ]).then(choice => {
+        if (choice.role === 'Engineer') {
+            addEngineer();
+        } else {
+            addIntern();
+        }
     })
 };
 
