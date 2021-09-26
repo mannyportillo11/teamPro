@@ -3,6 +3,8 @@ const { writeFile, copyFile } = require('./lib/generateSite');
 const generateSite = require('./src/page-template');
 
 const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 //initial empty employee object array
 const employees = [];
